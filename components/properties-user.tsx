@@ -1,26 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
-import axios from "axios";
-import { Trash2 } from "lucide-react";
 import Image from "next/image";
-import Router from "next/router";
 
-const AdsComponentUserPage = ({ adId, image, title, details, price }: any) => {
-
-    async function deleteAd() {
-        try {
-            const response = await axios.post("/api/ads/deletead", { adId });
-            Router.reload();
-        } catch (error) {
-            console.error("Error deleting ad", error);
-        }
-    }
-
-
+const PropertiesUser = ({ adId, image, title, details, price }: any) => {
     return (
         <Card className="mb-4">
             <CardContent key={adId} className="grid gap-8">
                 <div className="grid gap-4 grid-cols-1">
-                    <div className="flex justify-between gap-5 max-sm:flex-col max-sm:items-center">
+                    <div className="flex gap-5 max-sm:flex-col max-sm:items-center">
                         <div className="flex p-1">
                             <Image className="mx-auto" src={image} width={200} height={200} alt={adId} />
                         </div>
@@ -37,11 +23,6 @@ const AdsComponentUserPage = ({ adId, image, title, details, price }: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-center items-center">
-                            <div onClick={deleteAd} className="hover:bg-secondary p-1 rounded-lg">
-                                <Trash2 />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </CardContent>
@@ -49,4 +30,4 @@ const AdsComponentUserPage = ({ adId, image, title, details, price }: any) => {
     );
 };
 
-export default AdsComponentUserPage;
+export default PropertiesUser;

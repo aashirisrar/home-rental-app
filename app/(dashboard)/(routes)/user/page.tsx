@@ -2,24 +2,22 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "next/navigation";
 import UserProfileComponent from "@/components/user-profile";
 import { SkeletonCard } from "@/components/skeleton-card";
-import AdsComponentUserPage from "@/components/ads-component-user-page";
+import PropertiesUserPage from "@/components/properties-user-page";
 
 export default function UserProfilePage() {
-  const params = useParams();
   const [user, setUser] = useState({});
-  const [ads, setAds] = useState([]);
+  const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchUser() {
     try {
       const response = await axios.post("/api/profile/getprofile");
       setUser(response.data.user);
-      setAds(response.data.ads);
+      setProperties(response.data.properties);
     } catch (error) {
-      console.error("Error fetching ads", error);
+      console.error("Error fetching properties", error);
     }
   }
 
@@ -36,16 +34,16 @@ export default function UserProfilePage() {
 
   return (
     <>
-      {ads ?
+      {properties ?
         <div>
           <div className="flex items-center justify-between">
-            <h1 className="text-lg font-semibold md:text-2xl">User Details</h1>
+            <h1 className="text-lg font-semibold md:text-2xl">Your Properties</h1>
           </div>
           <div className="mt-2">
             <UserProfileComponent user={user} />
           </div>
           <div
-            className="flex justify-between gap-4 rounded-lg shadow-sm"
+            className="flex flex-col justify-between gap-2 rounded-lg shadow-sm"
             x-chunk="dashboard-02-chunk-1"
           >
             {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -57,14 +55,16 @@ export default function UserProfilePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
+            <div className="text-lg">Properties</div>
             <div className="grid max-sm:mx-auto max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-3 grid-cols-3 mt-[5px] gap-2">
-              {ads?.map((ad: any) => (
-                <AdsComponentUserPage key={ad.adId} {...ad} />
+              {properties?.map((ad: any) => (
+                <PropertiesUserPage key={ad.adId} {...ad} />
               ))}
             </div>
           </div>
-        </div> :
-        <div>Not logged In</div>}
+        </div > :
+        <div>Not logged In</div>
+      }
 
     </>
   );

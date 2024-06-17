@@ -5,12 +5,12 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import UserProfileComponent from "@/components/user-profile";
 import { SkeletonCard } from "@/components/skeleton-card";
-import AdsComponent from "@/components/ads-component";
+import PropertiesUser from "@/components/properties-user";
 
 export default function UserProfilePage() {
   const params = useParams();
   const [user, setUser] = useState({});
-  const [ads, setAds] = useState([]);
+  const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchUser() {
@@ -19,9 +19,9 @@ export default function UserProfilePage() {
         name: params.username,
       });
       setUser(response.data.user);
-      setAds(response.data.ads);
+      setProperties(response.data.properties);
     } catch (error) {
-      console.error("Error fetching ads", error);
+      console.error("Error fetching properties", error);
     }
   }
 
@@ -45,7 +45,7 @@ export default function UserProfilePage() {
         <UserProfileComponent user={user} />
       </div>
       <div
-        className="flex justify-between gap-4 rounded-lg shadow-sm"
+        className="flex flex-col justify-between gap-2 rounded-lg shadow-sm"
         x-chunk="dashboard-02-chunk-1"
       >
         {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -58,9 +58,10 @@ export default function UserProfilePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
 
-        <div className="grid max-sm:mx-auto max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-2 max-xl:grid-cols-3 mt-[5px]">
-          {ads.map((ad: any) => (
-            <AdsComponent key={ad.adId} {...ad} />
+        <div className="text-lg">Properties</div>
+        <div className="grid gap-2 max-sm:mx-auto max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-2 grid-cols-3 mt-[5px]">
+          {properties.map((ad: any) => (
+            <PropertiesUser key={ad.adId} {...ad} />
           ))}
         </div>
       </div>
