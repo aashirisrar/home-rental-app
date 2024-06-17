@@ -27,10 +27,10 @@ model User {
 
   active Boolean @default(false)
 
-  ads Ad[]
-
   Session       Session[]
   ActivateToken ActivateToken[]
+  Property      Property[]
+  Rental        Rental[]
 }
 
 model ActivateToken {
@@ -53,15 +53,33 @@ model Session {
   updatedAt DateTime @updatedAt
 }
 
-model Ad {
-  adId      String   @id @unique @default(cuid())
-  title     String
-  details   String
-  image     String
-  createdAt DateTime @default(now())
-  price     Int      @default(0)
-  isSold    Boolean  @default(false)
+model Rental {
+  rentalId String @id @unique @default(cuid())
 
-  userId String
+  startDate DateTime
+  endDate   DateTime
+
+  totalRent Int
+
+  userId     String
+  propertyId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property   Property @relation(fields: [propertyId], references: [propertyId], onDelete: Cascade)
+}
+
+model Property {
+  propertyId String  @id @unique @default(cuid())
+  title      String
+  details    String
+  address    String
+  type       String
+  image      String
+  rent       Int     @default(0)
+  isRented   Boolean @default(false)
+  rooms      Int     @default(0)
+
+  userId String // the user to which the property belongs
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  Rental Rental[]
 }
