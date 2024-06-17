@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const { title, details, price, image } = await req.json();
+        const { title, details, address, type, image, rent, rooms } = await req.json();
 
         const session = await auth();
 
@@ -21,19 +21,22 @@ export async function POST(req: Request) {
             }
         })
 
-        // create the ad
-        const createdAd = await prisma.ad.create({
+        // create the property listing
+        const createProperty = await prisma.property.create({
             data: {
                 title,
                 details,
+                address,
+                type,
                 image,
-                price: parseInt(price),
+                rent: parseInt(rent),
+                rooms: parseInt(rooms),
                 userId: currentUser?.id!,
             },
         })
 
         return NextResponse.json(
-            { success: "Ad Created!", ad: createdAd },
+            { success: "Property Created!", property: createProperty },
             { status: 200 }
         );
     } catch (e) {

@@ -20,14 +20,14 @@ export async function POST(req: Request) {
             }
         });
 
-        const ads = await prisma.ad.findMany({
+        const properties = await prisma.property.findMany({
             where: {
                 userId: user?.id
             }
         });
 
         return NextResponse.json(
-            { success: "Profile Found!", isLoggedin: true, user: user, ads: ads },
+            { success: "Profile Found!", isLoggedin: true, user: user, properties: properties },
             { status: 200 }
         );
     } catch (e) {

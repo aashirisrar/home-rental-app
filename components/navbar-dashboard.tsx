@@ -68,7 +68,7 @@ const NavbarDashboard = () => {
                             className="flex items-center gap-2 text-lg font-semibold mb-2"
                         >
                             <Store className="h-6 w-6" />
-                            <span className="sr-only">Seller Inc</span>
+                            <span className="sr-only">Rental Inc</span>
                         </Link>
                         {routes.map((route) => (
                             <Link

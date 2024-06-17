@@ -18,7 +18,7 @@ export function MainNavigationMenu() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <a className="mr-6 flex items-center space-x-2" href="/">
           <Store />
-          <span className="hidden font-bold sm:inline-block">Seller Inc</span>
+          <span className="hidden font-bold sm:inline-block">Rental Inc</span>
         </a>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center gap-3">

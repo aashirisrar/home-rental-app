@@ -9,7 +9,6 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -34,12 +33,15 @@ import { FormSuccess } from "@/components/form-success";
 const formSchema = z.object({
     title: z.string(),
     details: z.string(),
-    price: z.string(),
+    address: z.string(),
+    type: z.string(),
     image: z.string(),
+    rent: z.string(),
+    rooms: z.string(),
 });
 
 
-export function CreateAd() {
+export function CreateProperty() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
@@ -48,15 +50,18 @@ export function CreateAd() {
         defaultValues: {
             title: "",
             details: "",
-            price: "",
+            address: "",
+            type: "",
             image: "",
+            rent: "",
+            rooms: "",
         },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
         try {
-            const resp = await axios.post("api/ads/createad", values);
+            const resp = await axios.post("api/property/createproperty", values);
             setError(resp.data.error);
             setSuccess(resp.data.success);
             location.reload();
@@ -77,13 +82,13 @@ export function CreateAd() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="gap-x-1"><PlusCircleIcon size={18} />  Create Ad</Button>
+                <Button variant="default" className="gap-x-1"><PlusCircleIcon size={18} />Add Property</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Create New Ad</DialogTitle>
+                    <DialogTitle>Add New Property</DialogTitle>
                     <DialogDescription>
-                        Add your details for your ad.
+                        Add your property details.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid py-1">
@@ -97,7 +102,7 @@ export function CreateAd() {
                                         <FormLabel>Title:</FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="e.g Samsung Watch 3"
+                                                placeholder="e.g Executive 2 Bedroom Apartment"
                                                 className="col-span-3"
                                                 {...field}
                                                 required
@@ -115,7 +120,7 @@ export function CreateAd() {
                                         <FormLabel>Details:</FormLabel>
                                         <FormControl>
                                             <Textarea
-                                                placeholder="e.g Brand New"
+                                                placeholder="e.g Brand New Apartment in a serene environment"
                                                 className="col-span-3"
                                                 {...field}
                                                 required
@@ -127,13 +132,68 @@ export function CreateAd() {
                             />
                             <FormField
                                 control={form.control}
-                                name="price"
+                                name="address"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Price:</FormLabel>
+                                        <FormLabel>Address:</FormLabel>
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder="e.g 1234, New York Street, New York"
+                                                className="col-span-3"
+                                                {...field}
+                                                required
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="type"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Type:</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="e.g Residential, Commercial, etc"
+                                                className="col-span-3"
+                                                {...field}
+                                                required
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="rent"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Rent:</FormLabel>
                                         <FormControl>
                                             <Input
                                                 placeholder="e.g. 1000"
+                                                type="number"
+                                                className="col-span-3"
+                                                {...field}
+                                                required
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="rooms"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Rooms:</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="e.g. 4"
                                                 type="number"
                                                 className="col-span-3"
                                                 {...field}
@@ -167,7 +227,7 @@ export function CreateAd() {
                             </div>
                             <FormSuccess message={success} />
                             <div className="flex justify-end">
-                                <Button type="submit">Create Ad</Button>
+                                <Button type="submit">Create Property</Button>
                             </div>
                         </form>
                     </Form>

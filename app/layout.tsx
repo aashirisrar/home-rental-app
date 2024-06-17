@@ -5,8 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Online Marketplace App",
-  description: "Sell yours items easily.",
+  title: "Home Rental App",
+  description: "Find properties to rent.",
 };
 
 export default function RootLayout({

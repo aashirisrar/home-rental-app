@@ -1,10 +1,10 @@
 "use client";
 
-import { CreateAd } from "@/components/create-ad";
+import { CreateProperty } from "@/components/create-property";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Ads from "@/components/ads";
 import { SkeletonCard } from "@/components/skeleton-card";
+import PropertiesHomePage from "@/components/properties-home-page";
 
 export default function HomePage() {
   const [loggedin, setLoggedin] = useState(false);
@@ -36,8 +36,7 @@ export default function HomePage() {
         <h1 className="text-lg font-semibold md:text-2xl">Ads</h1>
         <div className="flex gap-x-3">
           {/* // check if user is logged in */}
-          {loggedin && <CreateAd />}
-          {/* {society && <CreateEvent />} */}
+          {loggedin && <CreateProperty />}
         </div>
       </div>
       <div
@@ -54,7 +53,7 @@ export default function HomePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
         <div className="mx-auto">
-          <Ads />
+          <PropertiesHomePage />
         </div>
       </div>
     </>
