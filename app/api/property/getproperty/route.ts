@@ -3,23 +3,23 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const adId = await req.json();
+        const propertyId = await req.json();
         // update the user's profile
-        const ad = await prisma.ad.findUnique({
+        const property = await prisma.property.findUnique({
             where: {
-                adId
+                propertyId
             },
         })
 
-        // find the owner of ad
+        // find the owner of property
         const foundUser = await prisma.user.findUnique({
             where: {
-                id: ad?.userId
+                id: property?.userId
             }
         });
 
         return NextResponse.json(
-            { success: "Posts Found!", ads: ad, user: foundUser },
+            { success: "Property Found!", property: property, user: foundUser },
             { status: 200 }
         );
     } catch (e) {

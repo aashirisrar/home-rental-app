@@ -3,25 +3,25 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
-const AdPage = ({ ads, user }: any) => {
+const PropertyDetails = ({ property, user }: any) => {
     return (
         <Card className="mb-4">
-            <CardContent key={ads.adId} className="grid gap-8">
+            <CardContent key={property.adId} className="grid gap-8">
                 <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                     <div className="flex gap-5 max-sm:flex-col max-sm:items-center">
                         <div className="flex-1 w-[30%] p-1">
-                            <Image className="mx-auto" src={ads.image} width={200} height={200} alt={ads.adId} />
+                            <Image className="mx-auto" src={property.image} width={200} height={200} alt={property.adId} />
                         </div>
                         <div className="flex-2 w-[70%] p-2">
                             <div className="flex flex-col gap-4">
-                                <div className="text-md font-medium leadsing-none">
-                                    {ads.title}
+                                <div className="text-md font-medium lepropertying-none">
+                                    {property.title}
                                 </div>
                                 <div className="text-sm text-muted-foreground">
-                                    {ads.details}
+                                    {property.details}
                                 </div>
                                 <div className="text-sm text-primary">
-                                    Rs {ads.price}
+                                    Rs {property.price}
                                 </div>
                             </div>
                         </div>
@@ -48,4 +48,4 @@ const AdPage = ({ ads, user }: any) => {
     );
 };
 
-export default AdPage;
+export default PropertyDetails;

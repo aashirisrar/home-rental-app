@@ -6,6 +6,7 @@ import {
     Store,
     Home,
     PanelTop,
+    Building,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -20,9 +21,14 @@ export const routes = [
         href: "/home",
     },
     {
-        label: "Your Ads",
-        icon: PanelTop,
+        label: "Your Properties",
+        icon: Building,
         href: "/user",
+    },
+    {
+        label: "Your Rentals",
+        icon: PanelTop,
+        href: "/rentals",
     },
 ];
 

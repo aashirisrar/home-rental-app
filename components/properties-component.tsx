@@ -36,7 +36,7 @@ export default function PropertiesComponent({
         </div>
         <div className="flex gap-2">
           <div className="w-full">
-            <Link href={"/ad/" + propertyId}>
+            <Link href={"/property/" + propertyId}>
               <Button className="w-full">View</Button>
             </Link>
           </div>

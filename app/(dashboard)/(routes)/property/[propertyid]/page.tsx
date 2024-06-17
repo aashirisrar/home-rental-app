@@ -4,23 +4,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { SkeletonCard } from "@/components/skeleton-card";
-import AdPage from "@/components/ad-page";
+import PropertyDetails from "@/components/property-details";
 
 export default function UserProfilePage() {
-  const [ads, setAds] = useState({});
+  const [property, setProperty] = useState({});
   const [user, setUser] = useState({});
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchUserPosts() {
+  async function fetchProperty() {
     try {
-      const response = await axios.post("/api/ads/getad", {
-        adId: params.adid,
+      const response = await axios.post("/api/property/getproperty", {
+        propertyId: params.propertyid,
       });
-      setAds(response.data.ads);
+      setProperty(response.data.property);
       setUser(response.data.user);
     } catch (error) {
-      console.error("Error fetching ads", error);
+      console.error("Error fetching properties", error);
     }
   }
 
@@ -28,7 +28,7 @@ export default function UserProfilePage() {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-    fetchUserPosts();
+    fetchProperty();
   }, []);
 
   if (isLoading) {
@@ -38,10 +38,10 @@ export default function UserProfilePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Ad Details</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Property Details</h1>
       </div>
       <div>
-        <AdPage user={user} ads={ads} />
+        <PropertyDetails user={user} property={property} />
       </div>
       {/* <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"
