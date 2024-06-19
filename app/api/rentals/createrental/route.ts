@@ -14,6 +14,7 @@ export async function POST(req: Request) {
         }
 
         const { propertyId, startDate, endDate, totalRent } = await req.json();
+        console.log(propertyId, startDate, endDate, totalRent);
 
         const user = await prisma.user.findUnique({
             where: {
@@ -25,9 +26,9 @@ export async function POST(req: Request) {
             data: {
                 userId: user?.id!,
                 propertyId,
-                totalRent,
-                startDate,
-                endDate
+                totalRent: parseInt(totalRent),
+                startDate: new Date(startDate),
+                endDate: new Date(endDate),
             }
         });
 

@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 const PropertyDetails = ({ property, user }: any) => {
     return (
@@ -21,7 +22,16 @@ const PropertyDetails = ({ property, user }: any) => {
                                     {property.details}
                                 </div>
                                 <div className="text-sm text-primary">
-                                    Rs {property.price}
+                                    Address: {property.address}
+                                </div>
+                                <div className="text-sm text-primary">
+                                    Rs {property.rent}
+                                </div>
+                                <div className="text-sm text-primary">
+                                    Rooms: {property.rooms}
+                                </div>
+                                <div className="text-sm text-primary">
+                                    Type: {property.type}
                                 </div>
                             </div>
                         </div>
@@ -42,6 +52,9 @@ const PropertyDetails = ({ property, user }: any) => {
                             </div>
                         </Link>
                     </div>
+                    <Link href={"/rent/" + property.propertyId}>
+                        <Button className="w-full">Rent the property</Button>
+                    </Link>
                 </div>
             </CardContent>
         </Card>

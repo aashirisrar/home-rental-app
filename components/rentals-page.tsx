@@ -11,9 +11,9 @@ const RentalsPage = () => {
     async function fetchFriendsPost() {
         try {
             const response = await axios.post("/api/rentals/getuserrentals");
-            setRentals(response.data.properties);
+            setRentals(response.data.rentals);
         } catch (error) {
-            console.error("Error fetching properties:", error);
+            console.error("Error fetching rentals:", error);
         }
     }
 
