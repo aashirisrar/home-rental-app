@@ -13,20 +13,26 @@ export async function POST(req: Request) {
             );
         }
 
+        const { propertyId, startDate, endDate, totalRent } = await req.json();
+
         const user = await prisma.user.findUnique({
             where: {
                 email: session?.user?.email!,
             }
         });
 
-        const properties = await prisma.property.findMany({
-            where: {
-                userId: user?.id
+        const createdRental = await prisma.rental.create({
+            data: {
+                userId: user?.id!,
+                propertyId,
+                totalRent,
+                startDate,
+                endDate
             }
         });
 
         return NextResponse.json(
-            { success: "Profile Found!", isLoggedin: true, user: user, properties: properties },
+            { success: "Rental Created!", createdRental: createdRental },
             { status: 200 }
         );
     } catch (e) {

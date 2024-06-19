@@ -4,7 +4,7 @@ import { CreateProperty } from "@/components/create-property";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { SkeletonCard } from "@/components/skeleton-card";
-import PropertiesHomePage from "@/components/properties-home-page";
+import RentalsPage from "@/components/rentals-page";
 
 export default function HomePage() {
   const [loggedin, setLoggedin] = useState(false);
@@ -33,12 +33,11 @@ export default function HomePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Properties</h1>
-        <div className="flex gap-x-3">
-          {/* // check if user is logged in */}
-          {loggedin && <CreateProperty />}
-        </div>
-      </div>
+        <h1 className="text-lg font-semibold md:text-2xl">Your Rentals</h1>
+        {/* <div className="flex gap-x-3"> */}
+        {/* {loggedin && <CreateProperty />} */}
+        {/* </div> */}
+      </div >
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"
         x-chunk="dashboard-02-chunk-1"
@@ -53,7 +52,7 @@ export default function HomePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
         <div className="mx-auto">
-          <PropertiesHomePage />
+          <RentalsPage />
         </div>
       </div>
     </>
