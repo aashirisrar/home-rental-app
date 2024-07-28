@@ -1,8 +1,12 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState, useTransition } from "react";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +18,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
-import { useEffect, useState, useTransition } from "react";
 import { SkeletonCard } from "./skeleton-card";
-import { useParams } from "next/navigation";
 
 const formSchema = z.object({
     propertyId: z.string(),
@@ -32,6 +33,7 @@ export default function PropertyRentalForm() {
     const [isLoading, setIsLoading] = useState(true);
     const [property, setProperty] = useState([]);
     const [rent, setRent] = useState("0");
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -82,6 +84,7 @@ export default function PropertyRentalForm() {
             try {
                 values.totalRent = rent;
                 const resp = await axios.post("/api/rentals/createrental", values);
+                router.push("/rentals")
                 // setError(resp.data.error);
                 // setSuccess(resp.data.success);
             } catch (error) {
@@ -154,7 +157,7 @@ export default function PropertyRentalForm() {
                                 </FormItem>
                             )}
                         />
-                        <div>Total Rent: {rent}</div>
+                        <div>Total Rent: {rent} Rs.</div>
 
                         <Button type="submit" className="w-full">
                             Rent

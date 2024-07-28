@@ -30,7 +30,7 @@ export default function RentalsComponent({
                 </div>
                 <div className="flex gap-2">
                     <div className="w-full">
-                        <Link href={"/property/" + rentalId}>
+                        <Link href={"/rentals/" + rentalId}>
                             <Button className="w-full">Details</Button>
                         </Link>
                     </div>

@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { SkeletonCard } from "@/components/skeleton-card";
 import RentalsPage from "@/components/rentals-page";
+import { useParams } from "next/navigation";
 
 export default function HomePage() {
-  const [loggedin, setLoggedin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
 
   async function fetchUserProfile() {
     try {
-      const response = await axios.post("/api/profile/getprofile");
-      setLoggedin(response.data.isLoggedin);
+      const response = await axios.post("/api/rentals/getrentaldetails", { rentalId: params.rentalid });
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
@@ -51,7 +51,6 @@ export default function HomePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
         <div className="mx-auto">
-          <RentalsPage />
         </div>
       </div>
     </>
