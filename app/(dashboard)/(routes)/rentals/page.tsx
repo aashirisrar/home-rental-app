@@ -50,7 +50,7 @@ export default function HomePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-        <div className="mx-auto">
+        <div className="mx-auto w-full">
           <RentalsPage />
         </div>
       </div>

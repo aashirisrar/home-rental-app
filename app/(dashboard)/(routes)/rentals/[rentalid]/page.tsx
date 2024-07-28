@@ -5,14 +5,17 @@ import axios from "axios";
 import { SkeletonCard } from "@/components/skeleton-card";
 import RentalsPage from "@/components/rentals-page";
 import { useParams } from "next/navigation";
+import RentalDetailsComponent from "@/components/rental-details-component";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [rentalDetail, setRentalDetails] = useState()
   const params = useParams();
 
   async function fetchUserProfile() {
     try {
       const response = await axios.post("/api/rentals/getrentaldetails", { rentalId: params.rentalid });
+      setRentalDetails(response.data.rental)
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
@@ -32,7 +35,7 @@ export default function HomePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Your Rentals</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Rentals Details</h1>
         {/* <div className="flex gap-x-3"> */}
         {/* {loggedin && <CreateProperty />} */}
         {/* </div> */}
@@ -50,7 +53,8 @@ export default function HomePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-        <div className="mx-auto">
+        <div>
+          <RentalDetailsComponent {...rentalDetail} />
         </div>
       </div>
     </>
